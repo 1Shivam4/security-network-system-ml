@@ -6,6 +6,7 @@ certifi
 matplotlib
 seaborn
 scikit-learn
+mlflow
 dill
 pyaml
 
