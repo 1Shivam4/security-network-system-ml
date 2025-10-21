@@ -25,6 +25,9 @@ from sklearn.ensemble import (
 
 import mlflow
 
+# import dagshub
+# dagshub.init(repo_owner='1Shivam4', repo_name='security-network-system-ml')
+
 class ModelTrainer:
     def __init__(self, model_trainer_config: ModelTrainerConfig, data_transformation_artifact: DataTransformationArtifacts):
         try:
@@ -42,7 +45,7 @@ class ModelTrainer:
             mlflow.log_metric("f1_score", f1_score)
             mlflow.log_metric("precision", precision_score)
             mlflow.log_metric("recall_score", recall_score)
-            mlflow.sklearn.log_model(best_model, "model")
+            mlflow.sklearn.log_model(best_model, name="model")
         
         
     def train_model(self, x_train, y_train, x_test, y_test):
@@ -111,6 +114,8 @@ class ModelTrainer:
         os.makedirs(model_dir_path, exist_ok=True)
         
         save_object(self.model_trainer_config.trained_model_file_path, obj=NetworkModel)
+        
+        save_object("final_model/model.pkl", best_model)
         
         preprocessor = load_object(self.model_trainer_config.trained_model_file_path)
         

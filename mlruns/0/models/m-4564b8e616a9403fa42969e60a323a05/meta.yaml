@@ -1,0 +1,10 @@
+artifact_location: file:///home/shivam/Desktop/security-network/mlruns/0/models/m-4564b8e616a9403fa42969e60a323a05/artifacts
+creation_timestamp: 1761070772104
+experiment_id: '0'
+last_updated_timestamp: 1761070775390
+model_id: m-4564b8e616a9403fa42969e60a323a05
+model_type: null
+name: model
+source_run_id: 283907cdf2f345e3ba8023a05c7d79a9
+status: 2
+status_message: null

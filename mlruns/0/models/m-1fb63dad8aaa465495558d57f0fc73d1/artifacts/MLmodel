@@ -1,0 +1,22 @@
+artifact_path: file:///home/shivam/Desktop/security-network/mlruns/0/models/m-1fb63dad8aaa465495558d57f0fc73d1/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.13.7
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.7.2
+mlflow_version: 3.5.0
+model_id: m-1fb63dad8aaa465495558d57f0fc73d1
+model_size_bytes: 13841633
+model_uuid: m-1fb63dad8aaa465495558d57f0fc73d1
+prompts: null
+run_id: 0b433a79c0f64dfb94e82b2cd0d00593
+utc_time_created: '2025-10-21 18:19:35.458922'

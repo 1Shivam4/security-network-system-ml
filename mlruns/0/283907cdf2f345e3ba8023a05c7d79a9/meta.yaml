@@ -1,0 +1,14 @@
+artifact_uri: file:///home/shivam/Desktop/security-network/mlruns/0/283907cdf2f345e3ba8023a05c7d79a9/artifacts
+end_time: 1761070775395
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 283907cdf2f345e3ba8023a05c7d79a9
+run_name: tasteful-gull-456
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1761070772083
+status: 3
+tags: []
+user_id: shivam
