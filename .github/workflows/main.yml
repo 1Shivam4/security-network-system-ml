@@ -8,9 +8,6 @@ on:
       - "README.md"
 
 jobs:
-  # ----------------------------
-  # 1️⃣ Continuous Integration
-  # ----------------------------
   integration:
     name: Continuous Integration
     runs-on: ubuntu-latest
@@ -24,9 +21,6 @@ jobs:
       - name: Run Unit Tests
         run: echo "Running unit tests"
 
-  # ----------------------------
-  # 2️⃣ Build and Push Docker Image to ECR
-  # ----------------------------
   build-and-push-ecr-image:
     name: Build and Push Docker Image
     needs: integration
@@ -48,13 +42,15 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Login to Amazon ECR
-        uses: aws-actions/amazon-ecr-login@v2 # ✅ updated to v2 to mask Docker password
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
 
       - name: Build, Tag, and Push Docker Image
+        id: build-image
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY_NAME }}
-          IMAGE_TAG: ${{ github.sha }} # ✅ dynamic tagging with commit SHA
+          IMAGE_TAG: ${{ github.sha }}
         run: |
           echo "Building Docker image..."
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
@@ -62,12 +58,9 @@ jobs:
           echo "Pushing Docker image to ECR..."
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
-          # Export image URI for downstream jobs (replaces deprecated set-output)
+          # Export image for downstream jobs
           echo "IMAGE_URI=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_ENV
 
-  # ----------------------------
-  # 3️⃣ Continuous Deployment to EC2
-  # ----------------------------
   deploy-to-ec2:
     name: Deploy Docker Image on EC2
     needs: build-and-push-ecr-image
@@ -84,7 +77,8 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Login to Amazon ECR
-        uses: aws-actions/amazon-ecr-login@v2
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
 
       - name: Pull Latest Docker Image
         run: |
