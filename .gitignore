@@ -26,7 +26,6 @@ share/python-wheels/
 *.egg
 NetworkSecurity.egg-info
 MANIFEST
-github-secrets.txt
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -137,8 +136,6 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-.env
-.envrc
 .venv
 env/
 venv/
